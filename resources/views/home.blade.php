@@ -1,5 +1,5 @@
 @extends('layout.main')
 
 @section('container')
-    fsdgsdgsd
+    <h1>Home</h1>
 @endsection

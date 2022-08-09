@@ -9,9 +9,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
-          <a class="nav-link" href="/about">About</a>
-          <a class="nav-link" href="/posts">Blog</a>
+          <a class="nav-link @if ($title == 'Home')
+            active
+          @endif" aria-current="page" href="/home">Home</a>
+          <a class="nav-link @if ($title == 'About')
+          active
+        @endif" href="/about">About</a>
+          <a class="nav-link @if ($title == 'posts')
+          active
+        @endif" href="/posts">Blog</a>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('container')
-    <h1>posts</h1>
+    <h1>{{ $category }}</h1>
 
     @foreach ($posts as $post)
        <div class="card my-4">  
