@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        User::factory(3)->create();
+        Post::factory(20)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -37,15 +38,15 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('1234')
         // ]);
 
-        // Category::create([
-        //     'name' => 'progamming',
-        //     'slug' => 'progamming'
-        // ]);
+        Category::create([
+            'name' => 'progamming',
+            'slug' => 'progamming'
+        ]);
 
-        // Category::create([
-        //     'name' => 'personal',
-        //     'slug' => 'personal'
-        // ]);
+        Category::create([
+            'name' => 'personal',
+            'slug' => 'personal'
+        ]);
 
         // Post::create([
         //     'category_id' => 1,
