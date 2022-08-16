@@ -6,6 +6,11 @@
     <div class="row justify-content-center mt-5">
       <div class="col-lg-6">
           <form action="/posts">
+            @if (request('category'))
+                <input type="hidden" name="category" value="{{ request('category') }}">
+            @elseif(request('author'))
+                <input type="hidden" name="author" value="{{ request('author') }}">
+            @endif
           <div class="input-group mb-3">
             <input type="text" name="search" class="form-control" placeholder="cari tau" aria-label="Recipient's username" value="{{ request('search') }}">
             <button class="btn btn-outline-danger" type="submit" id="btn-search">cari</button>
@@ -20,7 +25,7 @@
           <div class="" style="height: 190px; background-image: url('img/12121.jpg'); background-position: center; background-size: cover; overflow: hidden;"></div>
           <div class="card-body text-center">
             <h3 class="card-title">{{ $posts[0]->title }}</h3>
-            <blockquote class="blockquote mb-0 mt-3"><footer class="blockquote-footer">Oleh <a href="/author/{{ $posts[0]->author->username }}" class="text-decoration-none">{{ $posts[0]->author->name }}</a> in <cite title="Source Title"><a href="/categories/{{ $posts[0]->category->slug }}">{{ $posts[0]->category->name }}</a></cite></footer></blockquote>
+            <blockquote class="blockquote mb-0 mt-3"><footer class="blockquote-footer">Oleh <a href="/posts?author={{ $posts[0]->author->username }}" class="text-decoration-none">{{ $posts[0]->author->name }}</a> in <cite title="Source Title"><a href="/posts?category={{ $posts[0]->category->slug }}">{{ $posts[0]->category->name }}</a></cite></footer></blockquote>
             <p class="card-text">{{ $posts[0]->excerpt }}</p>
             <p class="card-text"><small class="text-muted">{{ $posts[0]->created_at->diffForHumans() }}</small></p>
             <a href="/post/{{ $posts[0]->slug }}" class="btn btn-primary">Read more</a>
@@ -33,7 +38,7 @@
                   </div>
                   <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                      <footer class="blockquote-footer">Oleh <a href="/author/{{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a> in <cite title="Source Title"><a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a></cite></footer>
+                      <footer class="blockquote-footer">Oleh <a href="/posts?author={{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a> in <cite title="Source Title"><a href="/posts?category={{ $post->category->slug }}">{{ $post->category->name }}</a></cite></footer>
                       <p>{{ $post->excerpt }}</p>
                       
                     </blockquote>
@@ -45,6 +50,7 @@
           <p class="text-center f2-4">NO POST FOUND</p>
       @endif
 
+      {{ $posts->links() }}
 
     
       
