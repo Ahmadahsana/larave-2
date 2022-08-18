@@ -50,7 +50,7 @@
           <p class="text-center f2-4">NO POST FOUND</p>
       @endif
 
-      {{ $posts->links() }}
+      {{ $posts->links() }} 
 
     
       
