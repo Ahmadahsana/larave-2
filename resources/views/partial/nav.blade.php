@@ -79,11 +79,28 @@
         </ul>
 
         <ul class="navbar-nav ms-auto">
+        @auth
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Halo {{ auth()->user()->name }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+            <li>
+              <form action="/logout" method="POST">
+                @csrf
+                  <button type="submit" class="dropdown-item">Logout</button>
+              </form>
+            </li>
+          </ul>
+        </li>
+        @else
           <li class="nav-item">
             <a class="nav-link @if ($title == 'Login')
             active
           @endif" href="/login">Login</a>
           </li>
+          @endauth
         </ul>
         
       </div>

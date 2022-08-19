@@ -10,16 +10,34 @@
           </div>
           @endif
 
+          @if (session()->has('loginError'))
+          <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            {{ session('loginError') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
+
             <h1 class="mt-5">Silahkan Login</h1>
-            <form>
+            <form action="/login" method="POST">
+              @csrf
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" aria-describedby="emailHelp" value="{{ old('email') }}">
+                  @error('email')  
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                   {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
                 </div>
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password">
+                  @error('password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Login</button>
