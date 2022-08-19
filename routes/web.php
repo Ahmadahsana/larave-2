@@ -61,6 +61,12 @@ Route::get('/categories', function () {
     ]);
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard.index', [
+        'title' => 'Dashboard'
+    ]);
+});
+
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 
 Route::post('/login', [LoginController::class, 'login']);
@@ -70,5 +76,3 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 
 Route::post('/register', [RegisterController::class, 'store']);
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
