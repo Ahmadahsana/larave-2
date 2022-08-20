@@ -6,7 +6,11 @@
     <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="#">Logout</a>
+        {{-- <a class="nav-link px-3" href="#">Logout</a> --}}
+        <form action="/logout" method="POST">
+          @csrf
+            <button type="submit" class="nav-link px-3 bg-danger">Logout</button>
+        </form>
       </div>
     </div>
   </header>
