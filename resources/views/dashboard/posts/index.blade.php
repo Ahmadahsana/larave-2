@@ -2,11 +2,12 @@
 
 @section('container')
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Post</h1>
+    <h2>My Post</h2>
   </div>
 
 
-  <h2>My Post</h2>
+  
+  <a href="/dashboard/posts/create" class="btn btn-primary my-3">Create new Post</a>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
