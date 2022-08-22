@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class DashboardPostController extends Controller
 {
@@ -27,7 +30,9 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create');
+        return view('dashboard.posts.create', [
+            'category' => Category::all()
+        ]);
     }
 
     /**
@@ -38,7 +43,19 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'body' => 'required'
+        ]);
+
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100, '...');
+        $validatedData['slug'] = Str::slug($request->title);
+
+        Post::create($validatedData);
+
+        return redirect('/dashboard/posts')->with('success', 'New post has been added');
     }
 
     /**
@@ -63,7 +80,11 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('dashboard.posts.edit', [
+            'title' => 'singgle post',
+            'post' => $post,
+            'category' => Category::all()
+        ]);
     }
 
     /**
@@ -75,7 +96,15 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'body' => 'required'
+        ]);
+
+        Post::where('id', $post->id)->update($validatedData);
+
+        return redirect('/dashboard/posts')->with('success', 'New post has been edit');
     }
 
     /**
@@ -86,6 +115,13 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Post::destroy($post->id);
+
+        return redirect('/dashboard/posts')->with('success', 'New post has been deleted');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = $request->title;
     }
 }

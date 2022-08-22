@@ -5,7 +5,11 @@
     <h2>My Post</h2>
   </div>
 
-
+  @if (session()->has('success'))
+  <div class="alert alert-primary" role="alert">
+    {{ session('success') }}
+  </div> 
+  @endif
   
   <a href="/dashboard/posts/create" class="btn btn-primary my-3">Create new Post</a>
       <div class="table-responsive">
@@ -31,7 +35,14 @@
                   </button>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/dashboard/posts/{{ $post->slug }}">View</a></li>
-                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                    <li><a class="dropdown-item" href="/dashboard/posts/{{ $post->slug }}/edit">Edit</a></li>
+                    <li>
+                      <form action="/dashboard/posts/{{ $post->slug }}" method="POST">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="dropdown-item" onclick="return confirm('yakin hapus?')">delete</button>
+                      </form>
+                    </li>
                   </ul>
                 </div>
               </td>
