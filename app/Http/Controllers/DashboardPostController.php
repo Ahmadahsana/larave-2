@@ -43,6 +43,7 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->file('gambar')->store('post-image');
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'category_id' => 'required',
@@ -66,6 +67,7 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
+
         return view('dashboard.posts.show', [
             'title' => 'singgle post',
             'post' => $post
@@ -96,6 +98,7 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        dd($request);
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'category_id' => 'required',

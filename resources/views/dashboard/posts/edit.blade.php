@@ -9,7 +9,7 @@
     @endif
     
     <div class="col-8">
-        <form method="POST" action="/dashboard/posts/{{ $post->slug }}">
+        <form method="POST" action="/dashboard/posts/{{ $post->slug }}" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-3">
@@ -21,10 +21,7 @@
                   </div>
               @enderror
             </div>
-            {{-- <div class="mb-3">
-              <label for="slug" class="form-label">Slug</label>
-              <input type="text" class="form-control" id="slug" name="slug">
-            </div> --}}
+            
             <div class="mb-3">
               <label for="category" class="form-label">Category</label>
               <select class="form-select" name="category_id">
@@ -37,6 +34,10 @@
                   
                 @endforeach
               </select>
+            </div>
+            <div class="mb-3">
+              <label for="gambar" class="form-label">Gambar</label>
+              <input type="file" class="form-control" id="gambar" name="gambar">
             </div>
             {{-- <div class="mb-3">
               <label for="body" class="form-label">Body</label>

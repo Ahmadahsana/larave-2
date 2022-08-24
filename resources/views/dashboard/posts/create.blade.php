@@ -9,7 +9,7 @@
     @endif
     
     <div class="col-8">
-        <form method="POST" action="/dashboard/posts">
+        <form method="POST" action="/dashboard/posts" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
@@ -36,6 +36,10 @@
                   
                 @endforeach
               </select>
+            </div>
+            <div class="mb-3">
+              <label for="gambar" class="form-label">Gambar</label>
+              <input type="file" class="form-control" id="gambar" name="gambar">
             </div>
             {{-- <div class="mb-3">
               <label for="body" class="form-label">Body</label>
