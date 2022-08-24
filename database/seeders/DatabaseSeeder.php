@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(3)->create();
+        User::factory(2)->create();
         Post::factory(20)->create();
 
         // \App\Models\User::factory()->create([
@@ -26,11 +26,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // User::create([
-        //     'name' => 'ahmad',
-        //     'email' => 'ahmad@gmail.com',
-        //     'password' => bcrypt('1234')
-        // ]);
+        User::create([
+            'name' => 'ahmad',
+            'username' => 'ahmad',
+            'email' => 'ahmad@gmail.com',
+            'password' => bcrypt('aaaaaa')
+        ]);
 
         // User::create([
         //     'name' => 'banu',
