@@ -22,7 +22,12 @@
       @if ($posts->count())
         <div class="card mb-3 mt-3">
           {{-- <img src="img/12121.jpg" style="height: 150px;" class="card-img-top" alt="..."> --}}
+          @if ($posts[0]->image)
+          <div class="" style="height: 190px; background-image: url('{{ asset('/storage') . '/' . $posts[0]->image }}'); background-position: center; background-size: cover; overflow: hidden;"></div>
+          @else
           <div class="" style="height: 190px; background-image: url('img/12121.jpg'); background-position: center; background-size: cover; overflow: hidden;"></div>
+          @endif
+          {{-- <div class="" style="height: 190px; background-image: url('img/12121.jpg'); background-position: center; background-size: cover; overflow: hidden;"></div> --}}
           <div class="card-body text-center">
             <h3 class="card-title">{{ $posts[0]->title }}</h3>
             <blockquote class="blockquote mb-0 mt-3"><footer class="blockquote-footer">Oleh <a href="/posts?author={{ $posts[0]->author->username }}" class="text-decoration-none">{{ $posts[0]->author->name }}</a> in <cite title="Source Title"><a href="/posts?category={{ $posts[0]->category->slug }}">{{ $posts[0]->category->name }}</a></cite></footer></blockquote>

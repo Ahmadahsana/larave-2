@@ -44,6 +44,7 @@ class DashboardPostController extends Controller
     public function store(Request $request)
     {
         // return $request->file('gambar')->store('post-image');
+        // ddd($request);
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'category_id' => 'required',
@@ -56,7 +57,7 @@ class DashboardPostController extends Controller
         $validatedData['slug'] = Str::slug($request->title);
 
         if ($request->file('gambar')) {
-            $validatedData['gambar'];
+            $validatedData['image'] = $request->file('gambar')->store('post-image');
         }
 
         Post::create($validatedData);
