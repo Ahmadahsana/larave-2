@@ -36,8 +36,20 @@
               </select>
             </div>
             <div class="mb-3">
-              <label for="gambar" class="form-label">Gambar</label>
-              <input type="file" class="form-control" id="gambar" name="gambar">
+              <label for="image" class="form-label @error('image') is-invalid @enderror">Gambar</label>
+              <input type="hidden" name="oldImage" value="{{ $post->image }}">
+              @if ($post->image)
+              <img alt="" src="{{ asset('storage/'). '/' . $post->image }}" class="d-block img-preview img-fluid mb-3 col-sm-5">
+              @else
+              <img alt="" class="img-preview img-fluid mb-3 col-sm-5">
+              @endif
+              <img alt="" class="img-preview img-fluid mb-3 col-sm-5">
+              <input type="file" class="form-control" id="image" name="image" onchange="previewImage()">
+              @error('image')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+              @enderror
             </div>
             {{-- <div class="mb-3">
               <label for="body" class="form-label">Body</label>
@@ -73,4 +85,20 @@
         
       })
     </script> --}}
+
+    <script>
+      function previewImage() {
+        const image = document.querySelector('#image')
+        const preview = document.querySelector('.img-preview')
+
+        preview.style.display = 'block'
+
+        const oFReader = new FileReader()
+        oFReader.readAsDataURL(image.files[0])
+
+        oFReader.onload = function(oFREvent) {
+          preview.src = oFREvent.target.result
+        }
+      }
+    </script>
 @endsection

@@ -39,7 +39,8 @@
             </div>
             <div class="mb-3">
               <label for="gambar" class="form-label @error('gambar') is-invalid @enderror">Gambar</label>
-              <input type="file" class="form-control" id="gambar" name="gambar">
+              <img alt="" class="img-preview img-fluid mb-3 col-sm-5">
+              <input type="file" class="form-control" id="gambar" name="gambar" onchange="previewImage()">
               @error('gambar')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -80,4 +81,20 @@
         
       })
     </script> --}}
+
+    <script>
+      function previewImage() {
+        const image = document.querySelector('#gambar')
+        const preview = document.querySelector('.img-preview')
+
+        preview.style.display = 'block'
+
+        const oFReader = new FileReader()
+        oFReader.readAsDataURL(image.files[0])
+
+        oFReader.onload = function(oFREvent) {
+          preview.src = oFREvent.target.result
+        }
+      }
+    </script>
 @endsection
